@@ -10,10 +10,10 @@ import java.util.List;
 public class UserDaoJDBCImpl implements UserDao {
     private static final String createUsersTable = """
             CREATE TABLE IF NOT EXISTS users (
-                id INT AUTO_INCREMENT PRIMARY KEY,
-                username VARCHAR(100) NOT NULL,
+                id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                name VARCHAR(100) NOT NULL,
                 lastName VARCHAR(100) NOT NULL,
-                age INT(255) NOT NULL        
+                age TINYINT(255) NOT NULL        
             )
             """;
     private static final String dropUsersTable = "DROP TABLE IF EXISTS users";
@@ -45,7 +45,7 @@ public class UserDaoJDBCImpl implements UserDao {
     public void dropUsersTable() {
         try (Connection con = Util.getConnect(); Statement stmt = con.createStatement()) {
             stmt.executeUpdate(dropUsersTable);
-           // System.out.println("Таблица users удалена (если она существовала).");
+            // System.out.println("Таблица users удалена (если она существовала).");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -68,7 +68,7 @@ public class UserDaoJDBCImpl implements UserDao {
     public void removeUserById(long id) {
         try (Connection con = Util.getConnect(); PreparedStatement prStm = con.prepareStatement(delUser)) {
             prStm.setInt(1, (int) id);
-           // System.out.println("User c id - " + id + " удален.");
+            // System.out.println("User c id - " + id + " удален.");
             int rows = prStm.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -97,7 +97,7 @@ public class UserDaoJDBCImpl implements UserDao {
     public void cleanUsersTable() {
         try (Connection con = Util.getConnect(); Statement stm = con.createStatement()) {
             stm.executeUpdate(clearTable);
-           // System.out.println("Таблица users очищена.");
+            // System.out.println("Таблица users очищена.");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
