@@ -13,8 +13,6 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
-
-
 public class Util {
     private static final String dbName = "newbd1_23";
     private static final String dbUser = "root";
